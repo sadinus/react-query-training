@@ -27,7 +27,7 @@ function fetchPeople(): Promise<Person[] | void> {
     .then((data: PeopleResponse) => data.results)
     .then((people) => people.map((person) => ({ ...person, id: uuidv4() })))
     .catch((error) => {
-      console.log("fetchPeople ->", error);
+      console.log(`${fetchPeople.name} ->`, error);
     });
 }
 
