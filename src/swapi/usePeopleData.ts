@@ -16,8 +16,8 @@ type PeopleResponse = {
   results: Person[];
 };
 
-async function fetchPeople(): Promise<Person[] | void> {
-  return fetch("https://swapi.dev/api/people/notfound")
+function fetchPeople(): Promise<Person[] | void> {
+  return fetch("https://swapi.dev/api/people")
     .then((response) => {
       if (!response.ok) {
         throw new Error(response.status.toString());
