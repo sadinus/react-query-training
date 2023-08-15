@@ -16,13 +16,18 @@ type PeopleResponse = {
   results: Person[];
 };
 
-async function fetchPeople(): Promise<Person[]> {
-  return fetch("https://swapi.dev/api/people/")
-    .then((response) => response.json())
+function fetchPeople(): Promise<Person[]> {
+  return fetch("https://swapi.dev/api/people/notfound")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(response.status.toString());
+      }
+      return response.json();
+    })
     .then((data: PeopleResponse) => data.results)
     .then((people) => people.map((person) => ({ ...person, id: uuidv4() })))
     .catch((error) => {
-      console.log("Error fetching data: ", error);
+      console.log("fetchPeople ->", error);
       return [];
     });
 }

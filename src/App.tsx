@@ -3,7 +3,7 @@ import { usePeopleData } from "./swapi";
 function App() {
   const { data: characters, isError, isLoading } = usePeopleData();
 
-  if (isError) return "Error occurred during fetch";
+  if (isError) return <h2>Error has occurred</h2>;
   if (isLoading) return "Loading...";
   if (!characters) return "No characters found";
 
