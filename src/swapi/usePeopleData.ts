@@ -16,7 +16,7 @@ type PeopleResponse = {
   results: Person[];
 };
 
-function fetchPeople(): Promise<Person[]> {
+async function fetchPeople(): Promise<Person[] | void> {
   return fetch("https://swapi.dev/api/people/notfound")
     .then((response) => {
       if (!response.ok) {
@@ -28,7 +28,6 @@ function fetchPeople(): Promise<Person[]> {
     .then((people) => people.map((person) => ({ ...person, id: uuidv4() })))
     .catch((error) => {
       console.log("fetchPeople ->", error);
-      return [];
     });
 }
 
