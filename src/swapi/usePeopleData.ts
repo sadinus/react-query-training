@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { v4 as uuidv4 } from "uuid";
 
 type Person = {
   id: string;
@@ -25,7 +24,9 @@ function fetchPeople(): Promise<Person[] | void> {
       return response.json();
     })
     .then((data: PeopleResponse) => data.results)
-    .then((people) => people.map((person) => ({ ...person, id: uuidv4() })))
+    .then((people) =>
+      people.map((person) => ({ ...person, id: crypto.randomUUID() }))
+    )
     .catch((error) => {
       console.log(`${fetchPeople.name} ->`, error);
     });
